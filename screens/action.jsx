@@ -181,6 +181,7 @@ export function ActionScreen() {
   };
 
   const isHot = count >= 90;
+  const calories = count * 0.5; 
 
   return (
     <Animated.View
@@ -213,6 +214,13 @@ export function ActionScreen() {
 
       <TouchableOpacity style={styles.button} onPress={resetShake}>
         <Text style={styles.buttonText}>Recommencer</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { marginTop: 15 }]}
+        onPress={() => navigation.navigate("stat", { calories })}
+      >
+        <Text style={styles.buttonText}>Voir Calories</Text>
       </TouchableOpacity>
     </Animated.View>
   );
