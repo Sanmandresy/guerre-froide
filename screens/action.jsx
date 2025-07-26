@@ -12,9 +12,11 @@ import { Image } from "expo-image";
 import * as Haptics from "expo-haptics";
 import { Audio } from "expo-av";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 export function ActionScreen() {
   const inset = useSafeAreaInsets();
+  const navigation = useNavigation();
 
   const [count, setCount] = useState(0);
   const maxShake = 100;
@@ -181,6 +183,7 @@ export function ActionScreen() {
   };
 
   const isHot = count >= 90;
+  const calories = count * 0.5;
 
   return (
     <Animated.View
@@ -213,6 +216,12 @@ export function ActionScreen() {
 
       <TouchableOpacity style={styles.button} onPress={resetShake}>
         <Text style={styles.buttonText}>Recommencer</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { marginTop: 15 }]}
+        onPress={() => navigation.navigate("stat", { calories })}>
+        <Text style={styles.buttonText}>Voir Calories</Text>
       </TouchableOpacity>
     </Animated.View>
   );
